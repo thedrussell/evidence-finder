@@ -24,7 +24,7 @@ const defautLayer = {
     paint: {
       // Base colour, change based on increasing thing
       'circle-color': ['step', ['get', 'point_count'], '#5DB5BC', 100, '#5DB5BC', 750, '#5DB5BC'],
-      'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 30, 25],
+      'circle-radius': ['step', ['get', 'point_count'], 10, 10, 14, 30, 24],
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff'
     }
@@ -37,7 +37,8 @@ const defautLayer = {
     filter: ['has', 'point_count'],
     layout: {
       'text-field': '{point_count_abbreviated}',
-      'text-font': ['Roboto Regular', 'Arial Unicode MS Bold'],
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-allow-overlap': true,
       'text-size': 12
     }
   };
@@ -52,13 +53,13 @@ const defautLayer = {
       'circle-radius': {
       'base': 1.75,
       'stops': [
-          [4, 4],
-          [12, 6],
-          [22, 200]
+        [4, 4],
+        [8, 10],
         ]
       },
       'circle-stroke-width': 1,
-      'circle-stroke-color': '#fff'
+      'circle-stroke-color': '#fff',
+      'circle-translate': [0, 0],
     }
   };
 
@@ -69,9 +70,10 @@ const defautLayer = {
     filter: ['has', 'point_count'],
     paint: {
       'circle-color': ['step', ['get', 'point_count'], '#ED716D', 100, '#ED716D', 750, '#ED716D'],
-      'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 30, 25],
+      'circle-radius': ['step', ['get', 'point_count'], 10, 10, 15, 30, 20],
       'circle-stroke-width': 1,
-      'circle-stroke-color': '#fff'
+      'circle-stroke-color': '#fff',
+      'circle-translate': [15, 15],
     }
   };
 
@@ -82,8 +84,12 @@ const defautLayer = {
     filter: ['has', 'point_count'],
     layout: {
       'text-field': '{point_count_abbreviated}',
-      'text-font': ['Roboto Regular', 'Arial Unicode MS Bold'],
-      'text-size': 12
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-size': 12,
+      'text-allow-overlap': true,
+    },
+    paint: {
+      'text-translate': [15, 15],
     }
   };
 
@@ -98,12 +104,20 @@ const defautLayer = {
       'base': 1.75,
       'stops': [
           [4, 4],
-          [12, 6],
-          [22, 180]
+          [8, 10],
         ]
       },
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff',
+      'circle-translate': [
+          'interpolate',
+          ['exponential', 0],
+          ['zoom'],
+          8, ["literal", [0, 0]],
+          9, ["literal", [10, 10]],
+          10, ["literal", [15, 15]],
+      ],
+      'circle-translate-anchor': "viewport",
     }
   };
 

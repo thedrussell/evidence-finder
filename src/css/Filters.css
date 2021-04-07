@@ -1,0 +1,147 @@
+/* The overall white box on the side. */
+.filters {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  background-color: white;
+  width: 248px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.21);
+  overflow: hidden;
+}
+
+/* Styling when it is open */
+.filters--open {
+  /* Make it appear 26px from the bottom */
+  bottom: 26px;
+}
+
+/* The header that is always visible. */
+.filters__header {
+  display: flex;
+  cursor: pointer;
+  padding: 12px 14px;
+}
+
+/* The default styles for the arrow icon */
+.filters__icon {
+  width: 18px;
+  transition: transform .2s ease-in-out;
+}
+
+/* When the arrow icon is open, rotate it. */
+.filters--open .filters__icon {
+  transform: rotate(180deg);
+}
+
+/* The title that says "filters" or filters with a number */
+.filters__title {
+  flex-grow: 1;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.15px;
+  text-transform: uppercase;
+  margin: 0;
+  position: relative;
+}
+
+
+
+/* The scrollable list of filters */
+.groups {
+  position: absolute;
+  top: 46px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  bottom: 0;
+  border-top: #F2F2F2 solid 1px;
+  border-bottom: #F2F2F2 solid 1px;
+  overflow-y: scroll;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+/* Each list of filters is in this group box */
+.group {
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: #F2F2F2 solid 1px;
+}
+
+/* Don't add a border or anything to bottom one */
+.group:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* The title of the filter/group */
+.group__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* The div containing all the checkboxes and labels */
+.group__list {
+
+}
+
+/* Style the label for fitler */
+.group__list label {
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+  padding-left: 31px;
+  cursor: pointer;
+  padding-bottom: 8px;
+  user-select: none;
+}
+
+/* Style the input for filter */
+.group__list input {
+  appearance: none;
+  outline: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0px 14px -3px -31px;
+  cursor: pointer;
+}
+
+/* When the input isn't checked */
+.group__list input:not(:checked) {
+  background: white;
+  border: 1px solid #979797 !important;
+}
+
+/* When the input isn't checked but is hovered */
+.group__list input:not(:checked):hover {
+  border: 1px solid #0076FF !important;
+}
+
+/* When the input is checked */
+.group__list input:checked {
+  background: #0076FF;
+  color: white;
+  position: relative;
+}
+
+/* Style the custom tick */
+.group__list input:checked::after {
+  content: '';
+  position: absolute;
+  width: 1.4ex;
+  height: 0.7ex;
+  background: transparent;
+  top: 0.7ex;
+  left: 0.6ex;
+  border: 2px solid white;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
