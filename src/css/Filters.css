@@ -18,8 +18,19 @@
 /* The header that is always visible. */
 .filters__header {
   display: flex;
+  flex-wrap: wrap;
   cursor: pointer;
   padding: 12px 14px;
+}
+
+.filters__clear {
+  flex-basis: 100%;
+  margin-top: 10px;
+  font-size: .7rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: #ED716D;
 }
 
 /* The default styles for the arrow icon */
@@ -49,7 +60,7 @@
 /* The scrollable list of filters */
 .groups {
   position: absolute;
-  top: 46px;
+  top: 66px;
   padding-top: 16px;
   padding-bottom: 16px;
   bottom: 0;

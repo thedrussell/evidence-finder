@@ -24,7 +24,7 @@ const defautLayer = {
     paint: {
       // Base colour, change based on increasing thing
       'circle-color': ['step', ['get', 'point_count'], '#5DB5BC', 100, '#5DB5BC', 750, '#5DB5BC'],
-      'circle-radius': ['step', ['get', 'point_count'], 10, 10, 14, 30, 24],
+      'circle-radius': ['step', ['get', 'point_count'], 10, 10, 15, 30, 20],
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff'
     }
@@ -70,7 +70,7 @@ const defautLayer = {
     filter: ['has', 'point_count'],
     paint: {
       'circle-color': ['step', ['get', 'point_count'], '#ED716D', 100, '#ED716D', 750, '#ED716D'],
-      'circle-radius': ['step', ['get', 'point_count'], 10, 10, 15, 30, 20],
+      'circle-radius': ['step', ['get', 'point_count'], 10, 10, 15, 100, 20],
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff',
       'circle-translate': [15, 15],

@@ -53,22 +53,32 @@ class App extends React.Component {
         onClick = {this.handleMapClick}
         ref={this.mapRef}
         scrollZoom={(!showPopup)}
+        maxZoom={15}
+        interactiveLayerIds={
+          [
+            'implementation-unclustered-point',
+            'implementation-clusters',
+            'effect-unclustered-point',
+            'effect-clusters',
+          ]
+        }
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
 
         {showPopup && this.displayPopup()}
 
         <Source id="implementation" type="geojson" data={this.state.implementationData}
             cluster={true}
-            clusterMaxZoom={9}
+            clusterMaxZoom={13}
             clusterRadius={50}>
           <Layer {...dataLayers.implementationClusterLayer} />
           <Layer {...dataLayers.implementationClusterCountLayer} />
-          <Layer {...dataLayers.implementationUnclusteredPointLayer} />
+          <Layer id="implementation-unclustered-point"
+          {...dataLayers.implementationUnclusteredPointLayer} />
         </Source>
 
         <Source id="effectiveness" type="geojson" data={this.state.effectivenessData}
           cluster={true}
-          clusterMaxZoom={9}
+          clusterMaxZoom={13}
           clusterRadius={50}>
           <Layer {...dataLayers.effectClusterLayer} />
           <Layer {...dataLayers.effectClusterCountLayer} />

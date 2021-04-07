@@ -28,13 +28,15 @@ class Filters extends Component {
 
   render = () => {
     const { filters, isExpanded } = this.state;
-    const header = filters.length ? `filters (${filters.length})` : `filters`;
+    let hasFilters = filters.length > 0;
+    const header = hasFilters ? `filters (${filters.length})` : `filters`;
 
     return (
       <div className={`filters ${isExpanded && "filters--open"}`}>
         <div className="filters__header" onClick={this.handleHeaderClick}>
           <h2 className="filters__title">{header}</h2>
           <ArrowIcon className="filters__icon"/>
+          {hasFilters && <p className="filters__clear" onClick={this.clearFilters}>Clear filters</p>}
         </div>
         {/* Whenever you want a new group call in the structure below.
           The key to fetch all possibilities is passed into _getItems */}
@@ -82,10 +84,17 @@ class Filters extends Component {
     )
   }
 
+  clearFilters = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    this.setState({
+      filters: [],
+    })
+  }
+
   _getItems(property) {
     // Get items takes a key and then reurns a map of list items with that key.
     const { filters } = this.state;
-
 
     return this._getValueSet(property).map((value, i) => {
       // Value is just a text representation of the label
