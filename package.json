@@ -13,6 +13,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "build-data": "cd data && npm run start && cd ..", 
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
