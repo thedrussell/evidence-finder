@@ -110,12 +110,13 @@ const defautLayer = {
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff',
       'circle-translate': [
-          'interpolate',
-          ['exponential', 0],
-          ['zoom'],
-          8, ["literal", [0, 0]],
-          9, ["literal", [10, 10]],
-          10, ["literal", [15, 15]],
+        15, 15
+          // 'interpolate',
+          // ['exponential', 0],
+          // ['zoom'],
+          // 8, ["literal", [0, 0]],
+          // 9, ["literal", [10, 10]],
+          // 10, ["literal", [15, 15]],
       ],
       'circle-translate-anchor': "viewport",
     }

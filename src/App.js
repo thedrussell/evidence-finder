@@ -52,13 +52,14 @@ class App extends React.Component {
         })}
         onClick = {this.handleMapClick}
         ref={this.mapRef}
+        scrollZoom={(!showPopup)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}>
 
         {showPopup && this.displayPopup()}
 
         <Source id="implementation" type="geojson" data={this.state.implementationData}
             cluster={true}
-            clusterMaxZoom={10}
+            clusterMaxZoom={9}
             clusterRadius={50}>
           <Layer {...dataLayers.implementationClusterLayer} />
           <Layer {...dataLayers.implementationClusterCountLayer} />
@@ -67,7 +68,7 @@ class App extends React.Component {
 
         <Source id="effectiveness" type="geojson" data={this.state.effectivenessData}
           cluster={true}
-          clusterMaxZoom={10}
+          clusterMaxZoom={9}
           clusterRadius={50}>
           <Layer {...dataLayers.effectClusterLayer} />
           <Layer {...dataLayers.effectClusterCountLayer} />
