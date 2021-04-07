@@ -53,7 +53,7 @@ class App extends React.Component {
         onClick = {this.handleMapClick}
         ref={this.mapRef}
         scrollZoom={(!showPopup)}
-        maxZoom={15}
+        maxZoom={14}
         interactiveLayerIds={
           [
             'implementation-unclustered-point',
