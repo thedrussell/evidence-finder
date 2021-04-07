@@ -10,10 +10,11 @@
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.11",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
-    "build-data": "cd data && npm run start && cd ..", 
+    "build-data": "cd data && npm run start && cd ..",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

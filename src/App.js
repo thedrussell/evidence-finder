@@ -1,12 +1,15 @@
+import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './css/Main.css';
 import './css/PopUp.css';
 import * as React from 'react';
 import ReactMapGL, {Source, Layer, Popup, NavigationControl, FlyToInterpolator} from 'react-map-gl';
 import Filters from './Filters/index.js';
-
 import geoJSON from "./data/geo.json";
 import { defaultMapStyle, dataLayers } from './data/map-style';
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 class App extends React.Component {
 
