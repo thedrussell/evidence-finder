@@ -4,7 +4,8 @@
   top: 26px;
   left: 26px;
   background-color: white;
-  width: 248px;
+  width: 23vw;
+  min-width: 246px;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.21);
   overflow: hidden;
 }
