@@ -42,6 +42,7 @@ class App extends React.Component {
   render = () => {
     let { mapStyle, data, viewport, showPopup } = this.state;
     return (
+      <>
       <ReactMapGL
         {...viewport}
         mapStyle={mapStyle}
@@ -90,8 +91,9 @@ class App extends React.Component {
             onViewportChange={(viewport) => this.setState({viewport: viewport})}
             showCompass={false}
           />
-          <Filters data={data} filterData={this.filterData}/>
       </ReactMapGL>
+      <Filters data={data} filterData={this.filterData}/>
+      </>
     );
   }
 
