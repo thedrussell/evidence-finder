@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import '../css/Filters.css';
 import { ReactComponent as ArrowIcon } from './arrow.svg';
+import orderConfig from '../order-config.json';
 
 class Filters extends Component {
   constructor(props) {
@@ -121,7 +122,7 @@ class Filters extends Component {
     // Make a copy of all the raw data passed down
     const data = {...this.props.data};
 
-    const valueSet = data.features.reduce((found, feature) => {
+    const valueSet = data.features.reduce((foundAccumulator, feature) => {
       // Goes through all the features and gets the value at key
       const values = feature.properties[key];
 
@@ -130,16 +131,21 @@ class Filters extends Component {
 
       // Loop over all values in arrays
       valueArr.forEach((value) => {
-        // If the found array already includes the value do nothing, else add it
-        const isNewValue = !found.includes(value);
-        isNewValue && found.push(value);
+        // If the foundAccumulator array already includes the value do nothing, else add it
+        const isNewValue = !foundAccumulator.includes(value);
+        isNewValue && foundAccumulator.push(value);
       });
-
-      return found;
+      return foundAccumulator;
     }, []);
 
-    // Returns array of values for that particular group.
-    return valueSet.filter(n => n).sort();
+
+    if (key in orderConfig){
+      // If we have an order config for the key return them in that order,
+      // be careful though as the values in the csv will have to match exactly
+      return orderConfig[key];
+    } else {
+      return valueSet.filter(n => n).sort();
+    }
   }
 
   handleHeaderClick = () => {
