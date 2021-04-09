@@ -51,7 +51,7 @@ class Filters extends Component {
             <div className="group">
               <h3 className="group__title">Year of publication</h3>
               <div className="group__list">
-              {this._getItems("year")}
+              {this._getItems("yearGroup")}
               </div>
             </div>
             <div className="group">
