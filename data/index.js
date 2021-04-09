@@ -49,8 +49,9 @@ fs.createReadStream('data.csv')
             "type": mainObject.map,
             "studyDesign": mainObject.study_design,
             "studyType": mainObject.type_of_study,
-            "title": mainObject.title,
-            "year": mainObject.year,
+            "title": mainObject.title.trim(),
+            "year": mainObject.year.trim(),
+            "yearGroup": (mainObject.year.length) ? getYearGroup(mainObject.year) : "",
             "url": mainObject.url,
             "authors": mainObject.authors,
             "interventionCategories": interventions,
@@ -89,3 +90,10 @@ fs.createReadStream('data.csv')
     });
 
   });
+
+
+let getYearGroup = (year) => {
+  const fromYear = Math.floor(year / 10 * 2) / 2 * 10;
+  const toYear = fromYear + 4;
+  return `${fromYear} – ${toYear}`;
+}
