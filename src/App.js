@@ -288,18 +288,18 @@ class App extends React.Component {
 
         // --------
         // check if matches ALL filters <-- use if filters are dynamic
-        const isExcluded = filters
-          .map(filter => properties[filter.name].includes(filter.value))
-          .includes(false);
-
-        !isExcluded && filteredFeaturesArr.push(feature);
+        // const isExcluded = filters
+        //   .map(filter => properties[filter.name].includes(filter.value))
+        //   .includes(false);
+        //
+        // !isExcluded && filteredFeaturesArr.push(feature);
         // --------
         // // check if matches ANY filter <-- use if filters are static
-        // const isIncluded = filters
-        //   .map(filter => properties[filter.name].includes(filter.value))
-        //   .includes(true);
-        //
-        // isIncluded && filteredFeaturesArr.push(feature);
+        const isIncluded = filters
+          .map(filter => properties[filter.name].includes(filter.value))
+          .includes(true);
+
+        isIncluded && filteredFeaturesArr.push(feature);
         // --------
 
         return filteredFeaturesArr;
