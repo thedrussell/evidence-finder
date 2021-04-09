@@ -34,7 +34,7 @@
 /* Extra styling to popup inner when there are multiple results for one dot */
 .popup__inner--multi {
   margin-top: 0;
-  max-height: 200px;
+  max-height: 300px; /* The height of the scroll box when there are multiple elements */
   overflow-y: scroll;
 }
 
