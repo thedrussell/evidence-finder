@@ -23,10 +23,10 @@ class App extends React.Component {
         selectedFeature: null,
         doUpdateMap: false,
         viewport: {
-          latitude: 52,
-          longitude: 0,
-          zoom: 4,
-          minZoom: 2,
+          latitude: 46,
+          longitude: -55,
+          zoom: 2.5,
+          minZoom: 1,
           bearing: 0,
           pitch: 0
         }
