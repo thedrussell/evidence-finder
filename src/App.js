@@ -213,7 +213,7 @@ class App extends React.Component {
     <>
       {!isSingle && <p className="popup__multiple-label">Multiple studies ({properties.length})</p>}
       <div className={`popup__inner ${!isSingle && "popup__inner--multi"}`}>
-      {/* If it's not single, show the multiple studies label. */}
+          {/* If it's not single, show the multiple studies label. */}
           {properties.map((item, i) => {
             let { type, title, url, year, authors, studyDesign } = item.properties;
             let hasUrl = (url.length > 0);
@@ -271,42 +271,92 @@ class App extends React.Component {
     }
   }
 
+  filterByArrayOfValues = (features, filters, nameOfFilter) => {
+    let matchingFilters = filters.filter((item) => item.name === nameOfFilter);
+
+    // If no matching filters just return og array
+    if (!matchingFilters.length) {
+      return features;
+    }
+
+
+    let filteredArray = features.filter((feature) => {
+
+      let isIncluded = false;
+
+      for (let i = 0; i < matchingFilters.length; i++) {
+        isIncluded = feature.properties[matchingFilters[i].name] === matchingFilters[i].value || feature.properties[matchingFilters[i].name].includes(matchingFilters[i].value);
+
+        if (isIncluded) {
+          break;
+        }
+      }
+
+      return isIncluded;
+    });
+
+    return filteredArray;
+  }
+
   filterData = (filters) => {
     // Filters is an array of objects with type and value
+    // passed to Filters but cos it's bound here will update stuff here
 
     // Create copy of data
     let data = {...geoJSON};
+    let features = data.features;
 
     // Check if have active filters
     const hasFilters = filters.length;
 
     if(hasFilters) {
-      // We reduce the data down to only the ones with matching key:values of filters
-      const filteredFeatures = data.features.reduce((filteredFeaturesArr, feature) => {
 
-        const { properties } = feature;
+      let filteredByType = this.filterByArrayOfValues(features, filters, "type");
+      let filteredByYearGroup = this.filterByArrayOfValues(filteredByType, filters, "yearGroup");
 
-        // --------
-        // check if matches ALL filters <-- use if filters are dynamic
-        // const isExcluded = filters
-        //   .map(filter => properties[filter.name].includes(filter.value))
-        //   .includes(false);
-        //
-        // !isExcluded && filteredFeaturesArr.push(feature);
-        // --------
-        // // check if matches ANY filter <-- use if filters are static
-        const isIncluded = filters
-          .map(filter => properties[filter.name].includes(filter.value))
-          .includes(true);
+      features = filteredByYearGroup;
 
-        isIncluded && filteredFeaturesArr.push(feature);
-        // --------
+      let filtersMinusTypeAndYearGroup = [...filters].filter((filter) => filter.name !== "type" && filter.name !== "yearGroup");
 
-        return filteredFeaturesArr;
-      }, []);
+      if (filtersMinusTypeAndYearGroup.length) {
+        const filteredFeatures = features.reduce((filteredFeaturesArr, feature) => {
+          const { properties } = feature;
+          // So imagining it should filter by type,
+          // then year,
+          // then rest is inclusive
 
-      // Returns an array of features that match the filter
-      data.features = filteredFeatures;
+          // --------
+          // check if matches ALL filters <-- use if filters are dynamic
+          // const isExcluded = filters
+          //   .map(filter => properties[filter.name].includes(filter.value))
+          //   .includes(false);
+          //
+          // !isExcluded && filteredFeaturesArr.push(feature);
+          // --------
+          // // check if matches ANY filter <-- use if filters are static
+
+          let hasFilterValueInProperties = filtersMinusTypeAndYearGroup.map((filter) => {
+            let isIncluded = (properties[filter.name] === filter.value || properties[filter.name].includes(filter.value));
+
+            if(isIncluded){
+              filteredFeaturesArr.push(feature);
+            }
+          })
+
+          // const isIncluded = filters
+          //   .map(filter => properties[filter.name].includes(filter.value))
+          //   .includes(true);
+          //
+          // isIncluded && filteredFeaturesArr.push(feature);
+          // --------
+
+          return filteredFeaturesArr;
+        }, []);
+        data.features = filteredFeatures;
+      } else {
+        // Returns an array of features that match the filter
+        data.features = features;
+      }
     }
 
     // Update the map data
