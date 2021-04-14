@@ -335,7 +335,7 @@ class App extends React.Component {
           // --------
           // // check if matches ANY filter <-- use if filters are static
 
-          let hasFilterValueInProperties = filtersMinusTypeAndYearGroup.map((filter) => {
+          filtersMinusTypeAndYearGroup.forEach((filter) => {
             let isIncluded = (properties[filter.name] === filter.value || properties[filter.name].includes(filter.value));
 
             if(isIncluded){
